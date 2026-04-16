@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════════
+   RESET
+════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ════════════════════════════════════════════════
+   BASE
+════════════════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system,
+               BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(
+    135deg,
+    #eef2ff 0%,
+    #f5f3ff 25%,
+    #fdf4ff 60%,
+    #f0fdf4 100%
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ════════════════════════════════════════════════
+   SCROLLBAR
+════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #818cf8, #a78bfa);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6366f1, #7c3aed);
+}
+
+/* ════════════════════════════════════════════════
+   SELECTION
+════════════════════════════════════════════════ */
+::selection {
+  background: rgba(99, 102, 241, 0.18);
+  color: #4338ca;
+}
+
+/* ════════════════════════════════════════════════
+   KEYFRAMES
+════════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.75; }
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: var(--progress, 100%); }
+}
+
+/* ════════════════════════════════════════════════
+   ANIMATION CLASSES
+════════════════════════════════════════════════ */
+.animate-fadeIn {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-slideUp {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-slideDown {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-float {
+  animation: float 3.5s ease-in-out infinite;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2.5s ease-in-out infinite;
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.delay-1 { animation-delay: 75ms;  }
+.delay-2 { animation-delay: 150ms; }
+.delay-3 { animation-delay: 225ms; }
+.delay-4 { animation-delay: 300ms; }
+
+/* ════════════════════════════════════════════════
+   INPUTS
+════════════════════════════════════════════════ */
+input, textarea, select {
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15),
+              0 1px 3px rgba(0,0,0,0.05);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] { -moz-appearance: textfield; }
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0.45;
+  cursor: pointer;
+  filter: invert(0.4) sepia(1) saturate(4) hue-rotate(220deg);
+}
+
+/* ════════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════════ */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+button:active:not(:disabled) { transform: scale(0.95); }
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* ════════════════════════════════════════════════
+   RECHARTS
+════════════════════════════════════════════════ */
+.recharts-tooltip-wrapper { border-radius: 16px !important; }
+.recharts-default-tooltip {
+  border-radius: 16px !important;
+  border: 1px solid rgba(99,102,241,0.1) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+.recharts-legend-wrapper { padding-top: 14px !important; }
+
+/* ════════════════════════════════════════════════
+   PROGRESS BAR
+════════════════════════════════════════════════ */
+.progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  animation: progressFill 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ════════════════════════════════════════════════
+   UTILITY
+════════════════════════════════════════════════ */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+}
+
+/* ════════════════════════════════════════════════
+   PRINT
+════════════════════════════════════════════════ */
+@media print {
+  body { background: white !important; }
+  header, footer, button { display: none !important; }
+}
